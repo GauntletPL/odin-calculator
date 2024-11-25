@@ -13,7 +13,7 @@ Calculator.subtract = function (minuend, ...nums) {
 
 Calculator.multiply = function (...nums) {
     if (nums.length === 0) return 0;
-    return nums.reduce((product, item) => product + item, 1);
+    return nums.reduce((product, item) => product * item, 1);
 }
 
 Calculator.divide = function (divident, divisor) {
@@ -31,6 +31,6 @@ Calculator.operate = function(term1, operator, term2) {
         case '/':
             return Calculator.divide(term1, term2);
         default:
-            throw new Error('Unsupported operation');
+            return term2 ?? term1;
     }
 }

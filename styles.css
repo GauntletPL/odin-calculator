@@ -11,6 +11,7 @@
     width: 40em;
     border: 1px solid darkgray;
     padding: 10px;
+    background: linear-gradient(#190846, #0b0029);
 }
 
 #display {
@@ -19,4 +20,87 @@
     padding: 10px;
     text-align: right;
     font-size: 3em;
+    background-color: white;
+}
+
+#keys {
+    display: flex;
+    gap: 10px;
+}
+
+#operations {
+    display: flex;
+    flex: 1 0 0;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    gap: 5px;
+    align-content: flex-start;
+}
+
+#numbers {
+    display: flex;
+    flex: 2 0 0;
+    flex-wrap: wrap-reverse;
+    padding-top: 10px;
+    gap: 5px;
+}
+
+.calc-button {
+  background-color: #FFFFFF;
+  border: 1px solid #222222;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #222222;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+  font-size: 1.5em;
+  font-weight: 600;
+  line-height: 1.25em;
+  margin: 0;
+  outline: none;
+  padding: 0.75em 23px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
+  user-select: none;
+  -webkit-user-select: none;
+  /*width: 3.375em;*/
+  flex: 1 0 30%;
+}
+
+.calc-button:focus-visible {
+  box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+  transition: box-shadow .2s;
+}
+
+.calc-button:active {
+  background-color: #F7F7F7;
+  border-color: #000000;
+  transform: scale(.96);
+}
+
+.calc-button:disabled {
+  border-color: #DDDDDD;
+  color: #DDDDDD;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.calc-button {
+    order: 3;
+}
+
+#dot-btn {
+    order: 0;
+}
+
+#calc-button-0 {
+    order: 1;
+}
+
+#total-btn {
+    order: 2;
 }
