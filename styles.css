@@ -1,0 +1,22 @@
+@font-face {
+    font-family: calculator;
+    src: url(./fonts/digital-7.ttf);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#calculator {
+    width: 40em;
+    border: 1px solid darkgray;
+    padding: 10px;
+}
+
+#display {
+    font-family: calculator;
+    border: 1px solid darkgray;
+    padding: 10px;
+    text-align: right;
+    font-size: 3em;
+}

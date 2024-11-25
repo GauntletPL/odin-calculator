@@ -7,6 +7,30 @@
         <script src="./scripts.js"></script>
     </head>
     <body>
+        <div id="calculator">
+            <div id="display">
+                1234567890
+            </div>
+            <div id="keys">
+                <div id="operations">
 
+                </div>
+                <div id="numbers">
+
+                </div>
+            </div>
+        </div>
     </body>
+    <script>
+        let term1 = 0,
+            term2 = 0,
+            operator = '';
+
+        const numbersDiv = document.querySelector('#numbers');
+        for (let i = 0; i < 10; i++) {
+            const numButton = document.createElement('button');
+            numButton.textContent = i;
+            numbersDiv.appendChild(numButton);
+        }
+    </script>
 </html>
