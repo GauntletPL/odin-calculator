@@ -17,7 +17,12 @@ for (const operation of operations) {
     operationsDiv.appendChild(operationButton);
 }
 
-const clearButton = createCalcButton('C');
+const deleteButton = createCalcButton('DEL');
+deleteButton.id = 'delete-btn';
+deleteButton.addEventListener('click', handleDeleteButtonClick);
+operationsDiv.appendChild(deleteButton);
+
+const clearButton = createCalcButton('CLEAR');
 clearButton.id = 'clear-btn';
 clearButton.addEventListener('click', handleClearButtonClick);
 operationsDiv.appendChild(clearButton);
@@ -84,8 +89,9 @@ function handleNumberButtonClick(ev) {
     if (state.lastClicked === BTN_TYPES.TOTAL) state.operator = '';
     if (state.lastClicked !== BTN_TYPES.NUMBER) state.display = 0;
     
-    if (state.fractions) {
-        if (state.fractions <= MAX_FRACTION) {
+    if (state.fractions !== null) {
+        if (state.fractions < MAX_FRACTION) {
+            state.fractions++;
             let stringDisplay = state.display.toFixed(state.fractions).slice(0, -1);
             state.display = Number(stringDisplay + ev.target.value);
         }
@@ -94,7 +100,24 @@ function handleNumberButtonClick(ev) {
     
     updateDisplay();
 
-    if (state.fractions && state.fractions <= MAX_FRACTION) state.fractions++;
+    state.lastClicked = BTN_TYPES.NUMBER;
+}
+
+function handleDeleteButtonClick(ev) {
+    if (state.lastClicked === BTN_TYPES.TOTAL) state.operator = '';
+    if (state.lastClicked !== BTN_TYPES.NUMBER) state.display = 0;
+    
+    if (state.fractions >= 1) {
+        let stringDisplay = state.display.toFixed(state.fractions).slice(0, -1);
+
+        if (state.fractions === 1) state.fractions = null;
+        else state.fractions--;
+
+        state.display = Number(stringDisplay);
+    }
+    else state.display = Math.floor(state.display / 10);
+    
+    updateDisplay();
 
     state.lastClicked = BTN_TYPES.NUMBER;
 }
@@ -103,7 +126,7 @@ function handleDotButtonClick(ev) {
     if (state.lastClicked === BTN_TYPES.TOTAL) state.operator = '';
     if (state.lastClicked !== BTN_TYPES.NUMBER) state.display = 0;
     
-    if (!state.fractions) state.fractions = 1;
+    if (!state.fractions) state.fractions = 0;
     
     updateDisplay();
 
@@ -113,7 +136,7 @@ function handleDotButtonClick(ev) {
 function handleTotalButtonClick(ev) {
     if (state.lastClicked === BTN_TYPES.NUMBER) {
         state.term2 = state.display;
-        state.fractions = 0;
+        state.fractions = null;
     } else if (state.lastClicked === BTN_TYPES.OPERATION) {
         state.term2 = state.term1;
     }
@@ -127,6 +150,9 @@ function handleTotalButtonClick(ev) {
 
 function updateDisplay() {
     let toDisplay = state.display;
+    if (state.fractions === 0) {
+        toDisplay = state.display + '.';
+    }
     if (state.fractions) {
         toDisplay = state.display.toFixed(Math.min(state.fractions, MAX_FRACTION));
     }
@@ -140,6 +166,6 @@ function resetState(newState) {
         operator: '',
         display: 0,
         lastClicked: '',
-        fractions: 0
+        fractions: null
     }
 }
