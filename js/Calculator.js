@@ -31,6 +31,6 @@ Calculator.operate = function(term1, operator, term2) {
         case '/':
             return Calculator.divide(term1, term2);
         default:
-            return term2 ?? term1;
+            throw new Error('Unsupported operation');
     }
 }
